@@ -41,6 +41,7 @@ Class Cpanel extends xmlapi {
         $this->set_host($config['ip']);
         $this->set_debug($config['debug']);
         $this->set_port($config['port']);
+        
     }
 
     public function setHost($host) {
@@ -124,11 +125,11 @@ Class Cpanel extends xmlapi {
         $result = $this->api2_query($username, 'SubDomain', 'addsubdomain', array(
                 'domain'      => $subdomain,
                 'rootdomain'  => $domain,
-                'dir'         => '/public_html/' . $subdomain_dir,
+                'dir'         => $subdomain_dir,
                 'disallowdot' => 1
             )
         );
-
+        
         return $this->returnResult($result);
     }
 
@@ -238,7 +239,7 @@ Class Cpanel extends xmlapi {
         }
     }
 
-    protected function setdbuser($db_name, $db_user, $privileges = '') {
+    public function setdbuser($db_name, $db_user, $privileges = '') {
 
         if (!isset($db_name) || !isset($db_user)) {
             $msg = "Database name and username is required.";
