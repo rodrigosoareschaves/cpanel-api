@@ -132,7 +132,18 @@ Class Cpanel extends xmlapi {
         
         return $this->returnResult($result);
     }
-
+    
+   public function createEmailAccount( $email,$password,$quota=500, $main_domain = '') {
+        $result = $this->api2_query($this->username, 'Email', 'addpop', array(
+                                                                        'domain'        => $main_domain,
+                                                                        'email'         => $email,
+                                                                        'password'      => $password,
+                                                                        'quota'         => $quota
+                                                                        )
+                                    );
+        
+        return $this->returnResult($result);
+    }
     public function removeSubdomain($subdomain, $main_domain = '') {
 
         $username = $this->username;
