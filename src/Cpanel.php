@@ -132,7 +132,6 @@ Class Cpanel extends xmlapi {
         
         return $this->returnResult($result);
     }
-    
    public function createEmailAccount( $email,$password,$quota=500, $main_domain = '') {
         $result = $this->api2_query($this->username, 'Email', 'addpop', array(
                                                                         'domain'        => $main_domain,
@@ -225,7 +224,7 @@ Class Cpanel extends xmlapi {
         $dbuser      = $this->username . "_" . $db_user;
 
         if (strlen($db_user) > $user_length || strlen($db_user) < 4) {
-            return array('reason' => 'Database username should be greater than 4 and less than ' . $user_length . ' characters.', 'result' => 0);
+        //    return array('reason' => 'Database username should be greater than 4 and less than ' . $user_length . ' characters.', 'result' => 0);
         }
 
         $validate = $this->checkPassword($db_pass);
@@ -236,9 +235,9 @@ Class Cpanel extends xmlapi {
 
         $user = $this->checkdbuser($dbuser);
 
-        if ($user['result'] == 1) {
-            return array('reason' => 'Database user ' . $dbuser . ' already exist.', 'result' => '0');
-        } else {
+        //if ($user['result'] == 1) {
+        //    return array('reason' => 'Database user ' . $dbuser . ' already exist.', 'result' => '0');
+        //} else {
             $user = $this->api2_query(
                 $this->username,
                 "MysqlFE",
@@ -247,7 +246,7 @@ Class Cpanel extends xmlapi {
             );
 
             return $this->returnResult($user);
-        }
+        //}
     }
 
     public function setdbuser($db_name, $db_user, $privileges = '') {
