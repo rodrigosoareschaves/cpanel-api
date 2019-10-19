@@ -180,9 +180,9 @@ Class Cpanel extends xmlapi {
 
         $name_length = 54 - strlen($this->username);
 
-        $db_name       = str_replace($this->username . '_', '', $this->slug($db_name, '_'));
-        $database_name = $this->username . "_" . $db_name;
-
+        //$db_name       = str_replace($this->username . '_', '', $this->slug($db_name, '_'));
+        //$database_name = $this->username . "_" . $db_name;
+        $database_name = $db_name;
         if (strlen($db_name) > $name_length || strlen($db_name) < 4) {
             return array('reason' => 'Database name should be greater than 4 and less than ' . $name_length . ' characters.', 'result' => 0);
         }
@@ -220,9 +220,10 @@ Class Cpanel extends xmlapi {
         }
 
         $user_length = 16 - strlen($this->username);
-        $db_user     = str_replace($this->username . '_', '', $this->slug($db_user, '_'));
+        /*$db_user     = str_replace($this->username . '_', '', $this->slug($db_user, '_'));
         $dbuser      = $this->username . "_" . $db_user;
-
+*/
+        $dbuser = $db_user;
         if (strlen($db_user) > $user_length || strlen($db_user) < 4) {
         //    return array('reason' => 'Database username should be greater than 4 and less than ' . $user_length . ' characters.', 'result' => 0);
         }
@@ -257,9 +258,10 @@ Class Cpanel extends xmlapi {
             return array('reason' => $msg, 'result' => 0);
         }
 
-        $dbname = $this->username . "_" . str_replace($this->username . '_', '', $db_name);
-        $dbuser = $this->username . '_' . ($db_user ? str_replace($this->username . '_', '', $db_user) : "myadmin"); //be careful this can only have a maximum of 7 characters
-
+        //$dbname = $this->username . "_" . str_replace($this->username . '_', '', $db_name);
+        //$dbuser = $this->username . '_' . ($db_user ? str_replace($this->username . '_', '', $db_user) : "myadmin"); //be careful this can only have a maximum of 7 characters
+        $dbname = $db_name;
+        $dbuser = $db_user;
         if (is_array($privileges)) {
             $privileges = implode(',', $privileges);
         }
