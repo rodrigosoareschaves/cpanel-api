@@ -143,17 +143,21 @@ Class Cpanel extends xmlapi {
         
         return $this->returnResult($result);
     }
+    //DOCUMENTION
+    //https://documentation.cpanel.net/display/DD/Guide+to+cPanel+API+2
     public function removeEmailAccount( $email, $main_domain = '') {
-        $result = $this->api2_query($this->username, 'Email', 'delete_pop', array('email'         => $email,));
+        
+        $result = $this->api2_query($this->username, 'Email', 'delpop', array('email'         => $email,'domain'=>$main_domain));
+        
         return $this->returnResult($result);
     }
     public function removeDbUser ($name, $main_domain = '') {
-        $result = $this->api2_query($this->username, 'Mysql', 'delete_user', array('name'         => $name,));
+        $result = $this->api2_query($this->username, 'MysqlFE', 'deletedbuser', array('dbuser'         => $name,));
         return $this->returnResult($result);
     }
 
     public function removeDbSchema ($name, $main_domain = '') {
-        $result = $this->api2_query($this->username, 'Mysql', 'delete_database', array('name'         => $name,));
+        $result = $this->api2_query($this->username, 'MysqlFE', 'deletedb', array('db'         => $name,));
         return $this->returnResult($result);
     }
     public function removeSubdomain($subdomain, $main_domain = '') {
