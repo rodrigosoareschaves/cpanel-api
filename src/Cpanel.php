@@ -143,6 +143,19 @@ Class Cpanel extends xmlapi {
         
         return $this->returnResult($result);
     }
+    public function removeEmailAccount( $email, $main_domain = '') {
+        $result = $this->api2_query($this->username, 'Email', 'delete_pop', array('email'         => $email,));
+        return $this->returnResult($result);
+    }name
+    public function removeDbUser ($name, $main_domain = '') {
+        $result = $this->api2_query($this->username, 'Mysql', 'delete_user', array('name'         => $name,));
+        return $this->returnResult($result);
+    }
+
+    public function removeDbSchema ($name, $main_domain = '') {
+        $result = $this->api2_query($this->username, 'Mysql', 'delete_database', array('name'         => $name,));
+        return $this->returnResult($result);
+    }
     public function removeSubdomain($subdomain, $main_domain = '') {
 
         $username = $this->username;
@@ -249,6 +262,8 @@ Class Cpanel extends xmlapi {
             return $this->returnResult($user);
         //}
     }
+
+
 
     public function setdbuser($db_name, $db_user, $privileges = '') {
 
