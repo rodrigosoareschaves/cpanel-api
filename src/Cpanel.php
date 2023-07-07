@@ -146,7 +146,7 @@ Class Cpanel extends xmlapi {
     public function removeEmailAccount( $email, $main_domain = '') {
         $result = $this->api2_query($this->username, 'Email', 'delete_pop', array('email'         => $email,));
         return $this->returnResult($result);
-    }name
+    }
     public function removeDbUser ($name, $main_domain = '') {
         $result = $this->api2_query($this->username, 'Mysql', 'delete_user', array('name'         => $name,));
         return $this->returnResult($result);
