@@ -102,6 +102,23 @@ Class Cpanel extends xmlapi {
         return $this->returnResult($result);
     }
 
+    public function listSubdomain($username = '', $main_domain = ''){
+        
+        $username      = $username ? $username : $this->username;
+        $domain        = $main_domain ? $main_domain : $this->domain;
+        
+        $result = $this->api2_query($username, 'SubDomain', 'listsubdomains', array('regex'  => $domain,'return_https_redirect_status' => '1',));
+        
+    }
+
+    public function runAutoSSL($username = '', $main_domain = ''){
+        $username      = $username ? $username : $this->username;
+        $domain        = $main_domain ? $main_domain : $this->domain;
+        $result = $this->api2_query($username, 'SubDomain', 'listsubdomains', array('regex'  => $domain,'return_https_redirect_status' => '1',));
+        $resultSSL = $this->xmlapi_query('SSL/start_autossl_check',[],'execute');
+    }
+    
+    
     public function createSubdomain($subdomain, $username = '', $subdomain_dir = '', $main_domain = '') {
 
         $subdomain_dir = $subdomain_dir ? $subdomain_dir : $this->subdomain_dir;
@@ -129,6 +146,7 @@ Class Cpanel extends xmlapi {
                 'disallowdot' => 1
             )
         );
+        
         
         return $this->returnResult($result);
     }
