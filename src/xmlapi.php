@@ -627,7 +627,7 @@ class xmlapi
     * @param array $vars An associative array of the parameters to be passed to the XML-API Calls
     * @return mixed
     */
-    public function xmlapi_query( $function, $vars = array() )
+    public function xmlapi_query( $function, $vars = array() ,$output='')
     {
         // Check to make sure all the data needed to perform the query is in place
         if (!$function) {
@@ -648,6 +648,9 @@ class xmlapi
 
         if ($this->output == 'json') {
             $query_type = '/json-api/';
+        }
+        if(!empty($output)){
+            $query_type = '/'.$output.'/';
         }
 
         $args = http_build_query($vars, '', '&');
@@ -694,7 +697,7 @@ class xmlapi
 
         // The only time a response should contain <html> is in the case of authentication error
         // cPanel 11.25 fixes this issue, but if <html> is in the response, we'll error out.
-
+        
         if (stristr($response, '<html>') == true) {
             if (stristr($response, 'Login Attempt Failed') == true) {
                 error_log("Login Attempt Failed");
