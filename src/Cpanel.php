@@ -173,7 +173,7 @@ Class Cpanel extends xmlapi {
         $result = $this->api2_query($this->username, 'MysqlFE', 'deletedbuser', array('dbuser'         => $name,));
         return $this->returnResult($result);
     }
-    public function changeDbUser ($name, $password) {
+    public function changeDbUserPassword ($name, $password) {
         $result = $this->api2_query($this->username, 'MysqlFE', 'changedbuserpassword', array('dbuser' => $name,'password'=>$password));
         return $this->returnResult($result);
     }
